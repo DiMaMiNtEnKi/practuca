@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Chat</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 20px;
+        }
+        h2 {
+            color: #333;
+        }
+        form {
+            margin-top: 20px;
+        }
+        input[type="text"] {
+            padding: 8px;
+            width: 300px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button[type="submit"] {
+            padding: 8px 16px;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        div {
+            margin-top: 20px;
+        }
+        p {
+            background-color: #fff;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            max-width: 80%;
+        }
+    </style>
+</head>
+<body>
+<h2>Chat with Doctor</h2>
+<div th:each="message : ${messages}">
+    <p th:text="${message.content}">Message content</p>
+</div>
+<form th:action="@{/chat/{doctorId}(doctorId=${doctorId})}" th:object="${message}" method="post">
+    <input type="text" th:field="*{content}" placeholder="Type your message here"/>
+    <button type="submit">Send</button>
+</form>
+</body>
+</html>
